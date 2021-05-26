@@ -1,9 +1,8 @@
 import { useState } from "react";
 import therapeuticProductsListingService from "../services/therapeuticProductsListing";
 
-function SearchForm() {
+function SearchForm({ setResults }) {
   const [drugName, setDrugName] = useState("");
-  const [results, setResults] = useState(null);
 
   function handleSubmit(event) {
     event.preventDefault();
