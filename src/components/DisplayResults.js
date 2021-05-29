@@ -1,7 +1,7 @@
 import MUIDataTable from "mui-datatables";
 import parseString from "../utils/utils";
 
-function DisplayResults({ results }) {
+function DisplayResults({ results, searchTerm }) {
   if (results == null) {
     return <div>No results</div>;
   }
@@ -40,9 +40,13 @@ function DisplayResults({ results }) {
 
   return (
     <MUIDataTable
+      title={`Search Results for "${searchTerm}"`}
       data={parsedRows}
       columns={columns}
-      options={{ resizableColumns: true }}
+      options={{
+        resizableColumns: true,
+        filter: false,
+      }}
     />
   );
 }

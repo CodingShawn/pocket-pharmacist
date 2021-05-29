@@ -1,12 +1,10 @@
-import { useState } from "react";
 import therapeuticProductsListingService from "../services/therapeuticProductsListing";
 
-function SearchForm({ setResults }) {
-  const [drugName, setDrugName] = useState("");
-
+function SearchForm({ setResults, drugName, setDrugName, setSearchTerm }) {
   function handleSubmit(event) {
     event.preventDefault();
     saveResultsToState();
+    setSearchTerm(drugName);
     setDrugName("");
   }
 
