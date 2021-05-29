@@ -1,5 +1,4 @@
-import { Grid } from "@material-ui/core";
-import { DataGrid } from "@material-ui/data-grid";
+import MUIDataTable from "mui-datatables";
 import parseString from "../utils/utils";
 
 function DisplayResults({ results }) {
@@ -10,30 +9,41 @@ function DisplayResults({ results }) {
   const rows = results.map((result, index) => {
     return { ...result, id: index };
   });
-  const columns = [
-    { field: "product_name", headerName: "Product Name", flex: 0.5 },
-    {
-      field: "active_ingredients",
-      headerName: "Active Ingredients",
-      flex: 1,
-    },
-    { field: "strength", headerName: "Strength", flex: 1 },
-    { field: "dosage_form", headerName: "Dosage Form", flex: 1 },
-  ];
 
-  const parsedColumns = columns.map((obj) => {
-    return {
-      ...obj,
-      valueFormatter: (params) => parseString(params.value),
-    };
+  const parsedRows = rows.map((row) => {
+    Object.keys(row).forEach(function (key) {
+      if (typeof row[key] === "string") {
+        row[key] = parseString(row[key]);
+      }
+    });
+    return row;
   });
 
+  const columns = [
+    {
+      name: "product_name",
+      label: "Product Name",
+    },
+    {
+      name: "active_ingredients",
+      label: "Active Ingredients",
+    },
+    {
+      name: "strength",
+      label: "Strength",
+    },
+    {
+      name: "dosage_form",
+      label: "Dosage Form",
+    },
+  ];
+
   return (
-    <Grid container wrap="nowrap">
-      <Grid item xs zeroMinWidth>
-        <DataGrid rows={rows} columns={parsedColumns} autoHeight={true} />
-      </Grid>
-    </Grid>
+    <MUIDataTable
+      data={parsedRows}
+      columns={columns}
+      options={{ resizableColumns: true }}
+    />
   );
 }
 
