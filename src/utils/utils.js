@@ -27,7 +27,7 @@ function replaceAmpersand(string) {
 }
 
 function parseString(string) {
-  return replaceAmpersand(removeQuotations(string));
+  return replaceAmpersand(removeQuotations(string)).toUpperCase();
 }
 
 // For testing with jest

@@ -46,6 +46,8 @@ function DisplayResults({ results, searchTerm }) {
       options={{
         resizableColumns: true,
         filter: false,
+        rowsPerPage: 20,
+        rowsPerPageOptions: [20, 50, 100],
       }}
     />
   );
