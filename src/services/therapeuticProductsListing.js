@@ -5,15 +5,25 @@ const BASE_URL =
 
 const therapeuticProductsListingService = {};
 
-therapeuticProductsListingService.getDrug = async function getDrug(drugName) {
+therapeuticProductsListingService.getDrug = async function getDrug(searchTerm) {
+  const searchViaProductName = await searchViaField("product_name", searchTerm);
+  const searchViaActiveIngredient = await searchViaField(
+    "active_ingredients",
+    searchTerm
+  );
+  const response = searchViaActiveIngredient.concat(searchViaProductName);
+  return response;
+};
+
+async function searchViaField(searchField, searchTerm) {
   const request = {
     params: {
-      q: { active_ingredients: drugName },
+      q: { [searchField]: searchTerm },
     },
   };
   const response = await axios.get(BASE_URL, request);
   const { records } = response.data.result;
   return records;
-};
+}
 
 export default therapeuticProductsListingService;
