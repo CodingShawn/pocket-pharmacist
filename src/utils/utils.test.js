@@ -2,7 +2,7 @@ const parser = require("./utils");
 
 describe("Testing of parseString function ", () => {
   test("removeQuotations function removes quotations at start and end of string", () => {
-    expect(parser.removeQuotations('""Adapalene&&Benzoyl peroxide""')).toBe(
+    expect(parser.removeQuotations('"Adapalene&&Benzoyl peroxide"')).toBe(
       "Adapalene&&Benzoyl peroxide"
     );
   });
@@ -14,7 +14,7 @@ describe("Testing of parseString function ", () => {
   });
 
   test("parseString function parses string correctly with special characters removed", () => {
-    expect(parser.parseString('""Adapalene&&Benzoyl peroxide""')).toBe(
+    expect(parser.parseString('"Adapalene&&Benzoyl peroxide"')).toBe(
       "Adapalene, Benzoyl peroxide"
     );
   });
