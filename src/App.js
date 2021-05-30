@@ -1,6 +1,7 @@
 import { useState } from "react";
 import DisplayResults from "./components/DisplayResults";
 import SearchForm from "./components/SearchForm";
+import Header from "./components/Header";
 
 function App() {
   const [results, setResults] = useState(null);
@@ -9,7 +10,7 @@ function App() {
 
   return (
     <>
-      <h1>Pocket Pharmacist</h1>
+      <Header />
       <SearchForm
         setResults={setResults}
         drugName={drugName}
