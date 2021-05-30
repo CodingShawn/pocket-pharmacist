@@ -3,9 +3,16 @@ import TextField from "@material-ui/core/TextField";
 import SearchIcon from "@material-ui/icons/Search";
 import IconButton from "@material-ui/core/IconButton";
 
-function SearchForm({ setResults, drugName, setDrugName, setSearchTerm }) {
+function SearchForm({
+  setResults,
+  drugName,
+  setDrugName,
+  setSearchTerm,
+  setIsLoading,
+}) {
   function handleSubmit(event) {
     event.preventDefault();
+    setIsLoading(true);
     saveResultsToState();
     setSearchTerm(drugName);
   }
@@ -13,6 +20,7 @@ function SearchForm({ setResults, drugName, setDrugName, setSearchTerm }) {
   async function saveResultsToState() {
     let results = await therapeuticProductsListingService.getDrug(drugName);
     setResults(results);
+    setIsLoading(false);
   }
 
   return (
@@ -22,6 +30,7 @@ function SearchForm({ setResults, drugName, setDrugName, setSearchTerm }) {
         type="search"
         onChange={({ target }) => setDrugName(target.value)}
         value={drugName}
+        required
       />
       <IconButton type="submit">
         <SearchIcon />

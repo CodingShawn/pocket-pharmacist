@@ -2,11 +2,13 @@ import { useState } from "react";
 import DisplayResults from "./components/DisplayResults";
 import SearchForm from "./components/SearchForm";
 import Header from "./components/Header";
+import Loading from "./components/Loading";
 
 function App() {
   const [results, setResults] = useState(null);
   const [drugName, setDrugName] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   return (
     <>
@@ -16,8 +18,12 @@ function App() {
         drugName={drugName}
         setDrugName={setDrugName}
         setSearchTerm={setSearchTerm}
+        setIsLoading={setIsLoading}
       />
-      <DisplayResults results={results} searchTerm={searchTerm} />
+      {isLoading && <Loading />}
+      {results && (
+        <DisplayResults results={results} searchTerm={searchTerm} />
+      )}
     </>
   );
 }

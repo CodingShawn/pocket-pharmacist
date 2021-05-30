@@ -2,9 +2,6 @@ import MUIDataTable from "mui-datatables";
 import parseString from "../utils/utils";
 
 function DisplayResults({ results, searchTerm }) {
-  if (results == null) {
-    return <div>No results</div>;
-  }
   console.log(results);
   const rows = results.map((result, index) => {
     return { ...result, id: index };
