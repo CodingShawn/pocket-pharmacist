@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import HourglassEmptyIcon from "@material-ui/icons/HourglassEmpty";
 
 function Loading() {
-  const defaultText = "Pulling data";
   const [rotation, setRotation] = useState(0);
 
   function rotateHourGlass() {
@@ -13,7 +12,7 @@ function Loading() {
   }
 
   function updateRotation() {
-    rotation <= 315 ? setRotation(rotation + 45) : setRotation(0);
+    rotation < 315 ? setRotation(rotation + 45) : setRotation(0);
   }
 
   function timer() {
@@ -31,22 +30,11 @@ function Loading() {
 
   useEffect(() => {
     rotateHourGlass();
-    // eslint-disable-next-line 
+    // eslint-disable-next-line
   }, [rotation]);
 
-  const style = {
-    fontSize: "20px",
-    padding: "24px",
-    color: "rgba(0,0,0,0.87)",
-    display: "flex",
-    alignItems: "center",
-    gap: "24px"
-  };
-
   return (
-    <div style={style}>
-      {defaultText} <HourglassEmptyIcon id="rotating" />
-    </div>
+    <HourglassEmptyIcon id="rotating" style={{ color: "rgba(0,0,0,0.54)", padding: "12px" }} />
   );
 }
 
