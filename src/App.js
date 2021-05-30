@@ -3,6 +3,7 @@ import DisplayResults from "./components/DisplayResults";
 import SearchForm from "./components/SearchForm";
 import Header from "./components/Header";
 import Loading from "./components/Loading";
+import Footer from "./components/Footer";
 
 function App() {
   const [results, setResults] = useState(null);
@@ -21,9 +22,8 @@ function App() {
         setIsLoading={setIsLoading}
       />
       {isLoading && <Loading />}
-      {results && (
-        <DisplayResults results={results} searchTerm={searchTerm} />
-      )}
+      {results && <DisplayResults results={results} searchTerm={searchTerm} />}
+      <Footer />
     </>
   );
 }
