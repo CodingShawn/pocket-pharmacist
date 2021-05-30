@@ -8,7 +8,6 @@ function SearchForm({ setResults, drugName, setDrugName, setSearchTerm }) {
     event.preventDefault();
     saveResultsToState();
     setSearchTerm(drugName);
-    setDrugName("");
   }
 
   async function saveResultsToState() {
@@ -17,19 +16,17 @@ function SearchForm({ setResults, drugName, setDrugName, setSearchTerm }) {
   }
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <TextField
-          label="Drug / Product Name"
-          type="search"
-          onChange={({ target }) => setDrugName(target.value)}
-          value={drugName}
-        />
-        <IconButton type="submit">
-          <SearchIcon />
-        </IconButton>
-      </form>
-    </div>
+    <form onSubmit={handleSubmit} style={{ padding: "10px 10px 0 24px" }}>
+      <TextField
+        label="Drug / Product Name"
+        type="search"
+        onChange={({ target }) => setDrugName(target.value)}
+        value={drugName}
+      />
+      <IconButton type="submit">
+        <SearchIcon />
+      </IconButton>
+    </form>
   );
 }
 
