@@ -5,8 +5,9 @@ import IconButton from "@material-ui/core/IconButton";
 import Loading from "../components/Loading";
 import { useState } from "react";
 
-function SearchForm({ setResults, drugName, setDrugName, setSearchTerm }) {
+function SearchForm({ setResults, setSearchTerm }) {
   const [isLoading, setIsLoading] = useState(false);
+  const [drugName, setDrugName] = useState("");
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -25,7 +26,7 @@ function SearchForm({ setResults, drugName, setDrugName, setSearchTerm }) {
     padding: "10px 10px 0 24px",
     display: "flex",
     alignItems: "center",
-    gap: "6px"
+    gap: "6px",
   };
 
   return (

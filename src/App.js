@@ -6,7 +6,6 @@ import Footer from "./components/Footer";
 
 function App() {
   const [results, setResults] = useState(null);
-  const [drugName, setDrugName] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
 
   return (
@@ -14,8 +13,6 @@ function App() {
       <Header />
       <SearchForm
         setResults={setResults}
-        drugName={drugName}
-        setDrugName={setDrugName}
         setSearchTerm={setSearchTerm}
       />
       {results && <DisplayResults results={results} searchTerm={searchTerm} />}
