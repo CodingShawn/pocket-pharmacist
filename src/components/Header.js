@@ -3,9 +3,13 @@ function Header() {
     fontSize: "40px",
     color: "#eae0cc",
     backgroundColor: "#660099",
-    padding: "10px"
+    padding: "10px",
   };
-  return <h1 style={headerStyle}>Pocket Pharmacist</h1>;
+  return (
+    <header>
+      <h1 style={headerStyle}>Pocket Pharmacist</h1>
+    </header>
+  );
 }
 
 export default Header;
