@@ -1,0 +1,19 @@
+#header {
+  font-size: 40px;
+  color: #eae0cc;
+  background-color: #660099;
+  padding: 10px;
+}
+
+#footer {
+  background-color: #d1b2e0;
+  padding: 24px 24px 12px 24px;
+  color: rgba(0, 0, 0, 0.87);
+}
+
+#search-form {
+  padding: 10px 10px 0 24px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}

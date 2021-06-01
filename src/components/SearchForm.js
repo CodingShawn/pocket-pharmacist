@@ -22,16 +22,9 @@ function SearchForm({ setResults, setSearchTerm }) {
     setIsLoading(false);
   }
 
-  const style = {
-    padding: "10px 10px 0 24px",
-    display: "flex",
-    alignItems: "center",
-    gap: "6px",
-  };
-
   return (
     <section>
-      <form onSubmit={handleSubmit} style={style}>
+      <form onSubmit={handleSubmit} id="search-form">
         <TextField
           label="Drug / Product Name"
           type="search"
