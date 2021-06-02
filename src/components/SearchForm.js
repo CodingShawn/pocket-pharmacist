@@ -25,17 +25,19 @@ function SearchForm({ setResults, setSearchTerm }) {
   return (
     <section>
       <form onSubmit={handleSubmit} id="search-form">
-        <TextField
-          label="Drug / Product Name"
-          type="search"
-          onChange={({ target }) => setDrugName(target.value)}
-          value={drugName}
-          required
-        />
         {!isLoading && (
-          <IconButton type="submit">
-            <SearchIcon />
-          </IconButton>
+          <>
+            <TextField
+              label="Drug / Product Name"
+              type="search"
+              onChange={({ target }) => setDrugName(target.value)}
+              value={drugName}
+              required
+            />
+            <IconButton type="submit">
+              <SearchIcon />
+            </IconButton>
+          </>
         )}
         {isLoading && <Loading />}
       </form>
