@@ -140,7 +140,7 @@ body {
 #root {
   height: 100%;
   display: grid;
-  grid-template-rows: 60px 58px auto 82px;
+  grid-template-rows: min-content max-content auto min-content
 }
 
 footer {
