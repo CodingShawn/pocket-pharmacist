@@ -2,14 +2,13 @@ import MUIDataTable from "mui-datatables";
 import parseString from "../utils/utils";
 
 function DisplayResults({ results, searchTerm }) {
-  console.log(results);
   const rows = results.map((result, index) => {
     return { ...result, id: index };
   });
 
   const parsedRows = rows.map((row) => {
     Object.keys(row).forEach(function (key) {
-      if (typeof row[key] === "string") {
+      if (typeof row[key] === "string" && key !== "forensic_classification") {
         row[key] = parseString(row[key]);
       }
     });
@@ -33,6 +32,27 @@ function DisplayResults({ results, searchTerm }) {
       name: "dosage_form",
       label: "Dosage Form",
     },
+    {
+      name: "forensic_classification",
+      label: "Forensic Classification",
+      options: {
+        display: false,
+      },
+    },
+    {
+      name: "manufacturer",
+      label: "Manufacturer",
+      options: {
+        display: false,
+      },
+    },
+    {
+      name: "country_of_manufacturer",
+      label: "Country of Manufacturer",
+      options: {
+        display: false,
+      },
+    },
   ];
 
   return (
@@ -44,7 +64,9 @@ function DisplayResults({ results, searchTerm }) {
         resizableColumns: true,
         filter: false,
         rowsPerPage: 20,
-        rowsPerPageOptions: [20, 50, 100],
+        rowsPerPageOptions: [20, 50],
+        responsive: "standard",
+        selectableRows: "none",
       }}
     />
   );
