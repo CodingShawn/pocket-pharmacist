@@ -67,7 +67,13 @@ function DisplayResults({ results, searchTerm }) {
         rowsPerPageOptions: [20, 50],
         responsive: "standard",
         selectableRows: "none",
-      }}
+        textLabels: {
+          body: {
+            noMatch: "No records found. Please check if you have spelt the name correctly."
+          }
+        }
+      }
+    }
     />
   );
 }
