@@ -17,3 +17,7 @@
   align-items: center;
   gap: 6px;
 }
+
+.MuiTableCell-body {
+  white-space: pre-line;
+}
