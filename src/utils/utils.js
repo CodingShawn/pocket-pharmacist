@@ -30,11 +30,18 @@ function parseString(string) {
   return replaceAmpersand(removeQuotations(string)).toUpperCase();
 }
 
+export function seperateComponents(string) {
+  return string.replace(/,/g, "\n");
+}
+
+const parserUtils = { seperateComponents, parseString };
+
 // For testing with jest
 // module.exports = {
 //   removeQuotations,
 //   replaceAmpersand,
 //   parseString,
+//   seperateComponents,
 // };
 
-export default parseString;
+export default parserUtils;
