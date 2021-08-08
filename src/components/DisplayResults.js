@@ -1,5 +1,5 @@
 import MUIDataTable from "mui-datatables";
-import parseString from "../utils/utils";
+import parserUtils from "../utils/utils";
 
 function DisplayResults({ results, searchTerm }) {
   const rows = results.map((result, index) => {
@@ -9,7 +9,11 @@ function DisplayResults({ results, searchTerm }) {
   const parsedRows = rows.map((row) => {
     Object.keys(row).forEach(function (key) {
       if (typeof row[key] === "string" && key !== "forensic_classification") {
-        row[key] = parseString(row[key]);
+        row[key] = parserUtils.parseString(row[key]);
+        if (key === "active_ingredients" || key === "strength") {
+          // To clearly show individual components composition within product
+          row[key] = parserUtils.seperateComponents(row[key]);
+        }
       }
     });
     return row;
@@ -69,11 +73,11 @@ function DisplayResults({ results, searchTerm }) {
         selectableRows: "none",
         textLabels: {
           body: {
-            noMatch: "No records found. Please check if you have spelt the name correctly."
-          }
-        }
-      }
-    }
+            noMatch:
+              "No records found. Please check if you have spelt the name correctly.",
+          },
+        },
+      }}
     />
   );
 }
