@@ -15,6 +15,19 @@ therapeuticProductsListingService.getDrug = async function getDrug(searchTerm) {
   return response;
 };
 
+therapeuticProductsListingService.getAllDrugs = async function getAllDrugs() {
+  const request = {
+    // Default download is 100, set to 100000 to ensure all records downloaded
+    // 5621 products registered as of August 2021
+    params: {
+      limit: 100000,
+    },
+  };
+  const response = await axios.get(BASE_URL, request);
+  const { records } = response.data.result;
+  return records;
+}
+
 async function searchViaField(searchField, searchTerm) {
   const request = {
     params: {
