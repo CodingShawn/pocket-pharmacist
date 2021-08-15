@@ -4,7 +4,7 @@ import SearchForm from "./components/SearchForm";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import "./components.css";
-import therapeuticProductsListingService from "./services/therapeuticProductsListing"
+import therapeuticProductsListingService from "./services/therapeuticProductsListing";
 
 function App() {
   const [results, setResults] = useState(null);
@@ -12,18 +12,35 @@ function App() {
   const [data, setData] = useState(null);
 
   useEffect(() => {
-    setDrugData()
-  }, [])
+    setDrugData();
+  }, []);
 
   async function setDrugData() {
     const drugs = await therapeuticProductsListingService.getAllDrugs();
-    setData(drugs);
+    const formattedData = formatData(drugs);
+    setData(formattedData);
+  }
+
+  function formatData(drugs) {
+    let formattedData = drugs.map((drug) => {
+      for (let field in drug) {
+        if (typeof drug[field] === "string") {
+          drug[field] = drug[field].toUpperCase();
+        }
+      }
+      return drug;
+    });
+    return formattedData;
   }
 
   return (
     <>
       <Header />
-      <SearchForm setResults={setResults} setSearchTerm={setSearchTerm} data={data} />
+      <SearchForm
+        setResults={setResults}
+        setSearchTerm={setSearchTerm}
+        data={data}
+      />
       {results && <DisplayResults results={results} searchTerm={searchTerm} />}
       <Footer />
     </>
