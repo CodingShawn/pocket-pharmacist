@@ -5,7 +5,7 @@ import IconButton from "@material-ui/core/IconButton";
 import Loading from "../components/Loading";
 import { useState } from "react";
 
-function SearchForm({ setResults, setSearchTerm }) {
+function SearchForm({ setResults, setSearchTerm, data }) {
   const [isLoading, setIsLoading] = useState(false);
   const [drugName, setDrugName] = useState("");
 
@@ -16,8 +16,13 @@ function SearchForm({ setResults, setSearchTerm }) {
     setSearchTerm(drugName);
   }
 
-  async function saveResultsToState() {
-    let results = await therapeuticProductsListingService.getDrug(drugName);
+  function saveResultsToState() {
+    let results = data.filter((record) => {
+      return (
+        record.active_ingredients.includes(drugName.toUpperCase()) ||
+        record.product_name.includes(drugName.toUpperCase())
+      );
+    });
     setResults(results);
     setIsLoading(false);
   }
