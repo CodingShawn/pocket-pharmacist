@@ -1,17 +1,14 @@
-import therapeuticProductsListingService from "../services/therapeuticProductsListing";
 import TextField from "@material-ui/core/TextField";
 import SearchIcon from "@material-ui/icons/Search";
 import IconButton from "@material-ui/core/IconButton";
 import Loading from "../components/Loading";
 import { useState } from "react";
 
-function SearchForm({ setResults, setSearchTerm, data }) {
-  const [isLoading, setIsLoading] = useState(false);
+function SearchForm({ setResults, setSearchTerm, data, isLoading }) {
   const [drugName, setDrugName] = useState("");
 
   function handleSubmit(event) {
     event.preventDefault();
-    setIsLoading(true);
     saveResultsToState();
     setSearchTerm(drugName);
   }
@@ -24,7 +21,6 @@ function SearchForm({ setResults, setSearchTerm, data }) {
       );
     });
     setResults(results);
-    setIsLoading(false);
   }
 
   return (
