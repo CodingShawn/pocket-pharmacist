@@ -31,6 +31,7 @@ function SearchForm({ setResults, setSearchTerm, data, isLoading }) {
     if(hasSearched) {
       saveResultsToState();
     }
+    // eslint-disable-next-line
   },[isLoading])
 
   return (
@@ -43,6 +44,7 @@ function SearchForm({ setResults, setSearchTerm, data, isLoading }) {
               type="search"
               onChange={({ target }) => setDrugName(target.value)}
               value={drugName}
+              autoFocus
               required
             />
             <IconButton type="submit">
