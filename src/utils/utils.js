@@ -17,17 +17,18 @@
 // }
 // Need to parse strings accordingly
 
-function removeQuotations(string) {
-  // As quotations are always the first and last char, to simply remove those chars
-  return string.substring(1, string.length - 1);
-}
+// Removed following function as dataset now returns queries without quotations
+// function removeQuotations(string) {
+//   // As quotations are always the first and last char, to simply remove those chars - outdated comment
+//   return string.substring(1, string.length - 1);
+// }
 
 function replaceAmpersand(string) {
   return string.replace(/&&/g, ", ");
 }
 
 function parseString(string) {
-  return replaceAmpersand(removeQuotations(string)).toUpperCase();
+  return replaceAmpersand(string).toUpperCase();
 }
 
 export function seperateComponents(string) {
