@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const BASE_URL =
-  "https://data.gov.sg/api/action/datastore_search?resource_id=3ee20559-372d-42f0-bde9-245e21f7f39b";
+  "https://data.gov.sg/api/action/datastore_search?resource_id=43668192-c352-4420-9731-01043c67c471";
 
 const therapeuticProductsListingService = {};
 
