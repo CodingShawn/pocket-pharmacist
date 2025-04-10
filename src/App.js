@@ -25,13 +25,15 @@ function App() {
   }
 
   function formatData(drugs) {
-    let formattedData = drugs.map((drug) => {
+    const formattedData = [];
+    drugs.forEach((drug) => {
+      const formattedDrug = {};
       for (let field in drug) {
         if (typeof drug[field] === "string") {
-          drug[field] = drug[field].toUpperCase();
+          formattedDrug[field.toLowerCase()] = drug[field].toUpperCase();
         }
       }
-      return drug;
+      formattedData.push(formattedDrug);
     });
     return formattedData;
   }
