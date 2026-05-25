@@ -1,32 +1,14 @@
 function Footer() {
-  const months = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
-  ];
-
-  function formatDate(d) {
-    return `${d.getDate()} ${months[d.getMonth()]} ${d.getFullYear()}`;
-  }
-
   function getDataLoadedDate() {
     try {
       const raw = localStorage.getItem("pp_therapeutic_products_v1");
       if (raw) {
         const { cachedAt } = JSON.parse(raw);
-        if (typeof cachedAt === "number") return formatDate(new Date(cachedAt));
+        if (typeof cachedAt === "number")
+          return new Date(cachedAt).toLocaleDateString("en-SG", { day: "numeric", month: "long", year: "numeric" });
       }
     } catch {}
-    return formatDate(new Date());
+    return new Date().toLocaleDateString("en-SG", { day: "numeric", month: "long", year: "numeric" });
   }
 
   let attribution = `* Contains information from Listing of Registered Therapeutic Products accessed on ${getDataLoadedDate()} from Health Sciences Authority which is made available under the terms of the`;

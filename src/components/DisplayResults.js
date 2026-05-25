@@ -1,18 +1,14 @@
 import MUIDataTable from "mui-datatables";
-import { parseString, seperateComponents } from "../utils/utils";
+import { parseString, separateComponents } from "../utils/utils";
 
 function DisplayResults({ results, searchTerm }) {
-  const rows = results.map((result, index) => {
-    return { ...result, id: index };
-  });
-
-  const parsedRows = rows.map((row) => {
-    Object.keys(row).forEach(function (key) {
+  const parsedRows = results.map((result, index) => {
+    const row = { ...result, id: index };
+    Object.keys(row).forEach((key) => {
       if (typeof row[key] === "string" && key !== "forensic_classification") {
         row[key] = parseString(row[key]);
         if (key === "active_ingredients" || key === "strength") {
-          // To clearly show individual components composition within product
-          row[key] = seperateComponents(row[key]);
+          row[key] = separateComponents(row[key]);
         }
       }
     });

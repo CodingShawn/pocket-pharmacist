@@ -1,4 +1,4 @@
-import { replaceAmpersand, parseString, seperateComponents } from "./utils";
+import { replaceAmpersand, parseString, separateComponents } from "./utils";
 
 describe("Testing of parseString function", () => {
   test("replaceAmpersand returns a string that replaces && with ', '", () => {
@@ -16,14 +16,14 @@ describe("Testing of parseString function", () => {
 
 describe("Substituting commas with newlines in string", () => {
   test("Replaces , with newline", () => {
-    expect(seperateComponents("ORPHENADRINE CITRATE, PARACETAMOL")).toBe(
+    expect(separateComponents("ORPHENADRINE CITRATE, PARACETAMOL")).toBe(
       "ORPHENADRINE CITRATE\n PARACETAMOL"
     );
   });
 
   test("Replaces multiple , with newlines", () => {
     expect(
-      seperateComponents(
+      separateComponents(
         "BETAMETHASONE DIPROPIONATE, CLOTRIMAZOLE, GENTAMICIN SULPHATE EQV GENTAMICIN"
       )
     ).toBe(
