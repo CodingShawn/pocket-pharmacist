@@ -1,5 +1,5 @@
 import MUIDataTable from "mui-datatables";
-import parserUtils from "../utils/utils";
+import { parseString, seperateComponents } from "../utils/utils";
 
 function DisplayResults({ results, searchTerm }) {
   const rows = results.map((result, index) => {
@@ -9,10 +9,10 @@ function DisplayResults({ results, searchTerm }) {
   const parsedRows = rows.map((row) => {
     Object.keys(row).forEach(function (key) {
       if (typeof row[key] === "string" && key !== "forensic_classification") {
-        row[key] = parserUtils.parseString(row[key]);
+        row[key] = parseString(row[key]);
         if (key === "active_ingredients" || key === "strength") {
           // To clearly show individual components composition within product
-          row[key] = parserUtils.seperateComponents(row[key]);
+          row[key] = seperateComponents(row[key]);
         }
       }
     });
