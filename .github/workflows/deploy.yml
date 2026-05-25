@@ -1,14 +1,16 @@
-name: Deploy to GitHub Pages
+name: CI / Deploy
 
 on:
   push:
+    branches: [master]
+  pull_request:
     branches: [master]
 
 permissions:
   contents: write
 
 jobs:
-  deploy:
+  test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -23,6 +25,20 @@ jobs:
       - run: npm test -- --watchAll=false
         env:
           CI: true
+
+  deploy:
+    needs: test
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - run: npm install
 
       - run: npm run build
         env:
