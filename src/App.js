@@ -11,6 +11,7 @@ function App() {
   const [searchTerm, setSearchTerm] = useState("");
   const [data, setData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [fetchError, setFetchError] = useState(null);
 
   useEffect(() => {
     setDrugData();
@@ -18,9 +19,9 @@ function App() {
   }, []);
 
   async function setDrugData() {
-    const drugs = await therapeuticProductsListingService.getAllDrugs();
-    const formattedData = formatData(drugs);
-    setData(formattedData);
+    const { data: drugs, error } = await therapeuticProductsListingService.getAllDrugs();
+    setFetchError(error);
+    if (drugs) setData(formatData(drugs));
     setIsLoading(false);
   }
 
@@ -46,6 +47,7 @@ function App() {
         setSearchTerm={setSearchTerm}
         data={data}
         isLoading={isLoading}
+        fetchError={fetchError}
       />
       {results && <DisplayResults results={results} searchTerm={searchTerm} />}
       <Footer />

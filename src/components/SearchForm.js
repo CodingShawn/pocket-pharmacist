@@ -1,10 +1,12 @@
 import TextField from "@material-ui/core/TextField";
 import SearchIcon from "@material-ui/icons/Search";
 import IconButton from "@material-ui/core/IconButton";
+import Tooltip from "@material-ui/core/Tooltip";
+import Warning from "@material-ui/icons/Warning";
 import Loading from "../components/Loading";
 import { useState, useEffect } from "react";
 
-function SearchForm({ setResults, setSearchTerm, data, isLoading }) {
+function SearchForm({ setResults, setSearchTerm, data, isLoading, fetchError }) {
   const [drugName, setDrugName] = useState("");
   const [hasSearched, setHasSearched] = useState(false);
 
@@ -18,6 +20,7 @@ function SearchForm({ setResults, setSearchTerm, data, isLoading }) {
   }
 
   function saveResultsToState() {
+    if (!data) return;
     let results = data.filter((record) => {
       return (
         record.active_ingredients.includes(drugName.toUpperCase()) ||
@@ -50,6 +53,15 @@ function SearchForm({ setResults, setSearchTerm, data, isLoading }) {
             <IconButton type="submit">
               <SearchIcon />
             </IconButton>
+            {fetchError && (
+              <Tooltip title={fetchError}>
+                <Warning
+                  fontSize="small"
+                  aria-label="Data fetch warning"
+                  style={{ color: data ? "#f9a825" : "#d32f2f" }}
+                />
+              </Tooltip>
+            )}
           </>
         )}
         {isLoading && hasSearched && <Loading />}

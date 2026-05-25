@@ -13,9 +13,23 @@ function Footer() {
     "November",
     "December",
   ];
-  const d = new Date();
-  let todayDate = `${d.getDate()} ${months[d.getMonth()]} ${d.getFullYear()}`;
-  let attribution = `* Contains information from Listing of Registered Therapeutic Products accessed on ${todayDate} from Health Sciences Authority which is made available under the terms of the`;
+
+  function formatDate(d) {
+    return `${d.getDate()} ${months[d.getMonth()]} ${d.getFullYear()}`;
+  }
+
+  function getDataLoadedDate() {
+    try {
+      const raw = localStorage.getItem("pp_therapeutic_products_v1");
+      if (raw) {
+        const { cachedAt } = JSON.parse(raw);
+        if (typeof cachedAt === "number") return formatDate(new Date(cachedAt));
+      }
+    } catch {}
+    return formatDate(new Date());
+  }
+
+  let attribution = `* Contains information from Listing of Registered Therapeutic Products accessed on ${getDataLoadedDate()} from Health Sciences Authority which is made available under the terms of the`;
 
   return (
     <footer id="footer">
