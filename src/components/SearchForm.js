@@ -1,71 +1,56 @@
 import TextField from "@material-ui/core/TextField";
-import SearchIcon from "@material-ui/icons/Search";
-import IconButton from "@material-ui/core/IconButton";
 import Tooltip from "@material-ui/core/Tooltip";
+import SearchIcon from "@material-ui/icons/Search";
 import Warning from "@material-ui/icons/Warning";
 import Loading from "../components/Loading";
 import { useState, useEffect } from "react";
 
+const MIN_CHARS = 3;
+
 function SearchForm({ setResults, setSearchTerm, data, isLoading, fetchError }) {
   const [drugName, setDrugName] = useState("");
-  const [hasSearched, setHasSearched] = useState(false);
-
-  function handleSubmit(event) {
-    event.preventDefault();
-    if (!isLoading) {
-      saveResultsToState();
-    }
-    setHasSearched(true);
-    setSearchTerm(drugName);
-  }
-
-  function saveResultsToState() {
-    if (!data) return;
-    let results = data.filter((record) => {
-      return (
-        record.active_ingredients.includes(drugName.toUpperCase()) ||
-        record.product_name.includes(drugName.toUpperCase())
-      );
-    });
-    setResults(results);
-  }
 
   useEffect(() => {
-    if(hasSearched) {
-      saveResultsToState();
+    if (!data || drugName.length < MIN_CHARS) {
+      setResults(null);
+      return;
     }
+    const upper = drugName.toUpperCase();
+    setResults(
+      data.filter(
+        (r) =>
+          r.active_ingredients.includes(upper) ||
+          r.product_name.includes(upper)
+      )
+    );
+    setSearchTerm(drugName);
     // eslint-disable-next-line
-  },[isLoading])
+  }, [drugName, data]);
 
   return (
     <section>
-      <form onSubmit={handleSubmit} id="search-form">
-        {!(isLoading && hasSearched) && (
-          <>
-            <TextField
-              label="Drug / Product Name"
-              type="search"
-              onChange={({ target }) => setDrugName(target.value)}
-              value={drugName}
-              autoFocus
-              required
+      <form onSubmit={(e) => e.preventDefault()} id="search-form">
+        <TextField
+          label="Drug / Product Name"
+          type="search"
+          onChange={({ target }) => setDrugName(target.value)}
+          value={drugName}
+          autoFocus
+        />
+        <Tooltip title="Search by drug or product name — results appear after 3 characters" placement="bottom">
+          <SearchIcon style={{ color: "rgba(0,0,0,0.54)", verticalAlign: "middle" }} />
+        </Tooltip>
+        {fetchError && (
+          <Tooltip title={fetchError}>
+            <Warning
+              fontSize="small"
+              aria-label="Data fetch warning"
+              style={{ color: data ? "#f9a825" : "#d32f2f" }}
             />
-            <IconButton type="submit">
-              <SearchIcon />
-            </IconButton>
-            {fetchError && (
-              <Tooltip title={fetchError}>
-                <Warning
-                  fontSize="small"
-                  aria-label="Data fetch warning"
-                  style={{ color: data ? "#f9a825" : "#d32f2f" }}
-                />
-              </Tooltip>
-            )}
-          </>
+          </Tooltip>
         )}
-        {isLoading && hasSearched && <Loading />}
       </form>
+      {isLoading && drugName.length >= MIN_CHARS && <Loading />}
     </section>
   );
 }
