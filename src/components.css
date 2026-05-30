@@ -18,6 +18,89 @@
   gap: 6px;
 }
 
-.MuiTableCell-body {
-  white-space: pre-line;
+#results {
+  padding: 16px 16px 24px 16px;
+}
+
+#results-title {
+  margin-bottom: 12px;
+  color: #660099;
+}
+
+#no-results {
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.result-card {
+  width: 100%;
+  border-left: 4px solid #d1b2e0;
+  margin-bottom: 8px !important;
+}
+
+.result-card:before {
+  display: none;
+}
+
+/* Tint the summary so collapsed cards read as distinct, clickable surfaces */
+.result-card .MuiAccordionSummary-root {
+  background-color: #f7f1fb;
+}
+
+.result-card.Mui-expanded {
+  border-left-color: #660099;
+}
+
+.result-summary {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+}
+
+.result-name {
+  font-weight: 600;
+  color: #4a0070;
+}
+
+.result-ingredients {
+  display: flex;
+  flex-direction: column;
+}
+
+.result-ingredient {
+  font-size: 0.9rem;
+  color: rgba(0, 0, 0, 0.7);
+}
+
+.result-classification {
+  align-self: flex-start;
+  margin-top: 2px;
+  padding: 2px 8px;
+  border-radius: 12px;
+  background-color: #ede0f5;
+  font-size: 0.75rem;
+  color: #660099;
+}
+
+.result-details {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+
+.result-detail-row {
+  display: flex;
+  flex-direction: column;
+}
+
+.result-detail-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #8a5cab;
+}
+
+.result-detail-value {
+  font-size: 0.9rem;
 }
