@@ -6,7 +6,7 @@ export function parseString(string) {
   return replaceAmpersand(string).toUpperCase();
 }
 
-export function seperateComponents(string) {
+export function separateComponents(string) {
   return string.replace(/,/g, "\n");
 }
 

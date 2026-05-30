@@ -104,3 +104,8 @@
 .result-detail-value {
   font-size: 0.9rem;
 }
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
