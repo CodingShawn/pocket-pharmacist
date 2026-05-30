@@ -1,20 +1,20 @@
 {
   "files": {
-    "main.css": "/pocket-pharmacist/static/css/main.2089f2d0.chunk.css",
-    "main.js": "/pocket-pharmacist/static/js/main.d2dae59c.chunk.js",
-    "main.js.map": "/pocket-pharmacist/static/js/main.d2dae59c.chunk.js.map",
+    "main.css": "/pocket-pharmacist/static/css/main.12b2ad58.chunk.css",
+    "main.js": "/pocket-pharmacist/static/js/main.1a7d7570.chunk.js",
+    "main.js.map": "/pocket-pharmacist/static/js/main.1a7d7570.chunk.js.map",
     "runtime-main.js": "/pocket-pharmacist/static/js/runtime-main.111ebabe.js",
     "runtime-main.js.map": "/pocket-pharmacist/static/js/runtime-main.111ebabe.js.map",
-    "static/js/2.709be02c.chunk.js": "/pocket-pharmacist/static/js/2.709be02c.chunk.js",
-    "static/js/2.709be02c.chunk.js.map": "/pocket-pharmacist/static/js/2.709be02c.chunk.js.map",
+    "static/js/2.a800085c.chunk.js": "/pocket-pharmacist/static/js/2.a800085c.chunk.js",
+    "static/js/2.a800085c.chunk.js.map": "/pocket-pharmacist/static/js/2.a800085c.chunk.js.map",
     "index.html": "/pocket-pharmacist/index.html",
-    "static/css/main.2089f2d0.chunk.css.map": "/pocket-pharmacist/static/css/main.2089f2d0.chunk.css.map",
-    "static/js/2.709be02c.chunk.js.LICENSE.txt": "/pocket-pharmacist/static/js/2.709be02c.chunk.js.LICENSE.txt"
+    "static/css/main.12b2ad58.chunk.css.map": "/pocket-pharmacist/static/css/main.12b2ad58.chunk.css.map",
+    "static/js/2.a800085c.chunk.js.LICENSE.txt": "/pocket-pharmacist/static/js/2.a800085c.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.111ebabe.js",
-    "static/js/2.709be02c.chunk.js",
-    "static/css/main.2089f2d0.chunk.css",
-    "static/js/main.d2dae59c.chunk.js"
+    "static/js/2.a800085c.chunk.js",
+    "static/css/main.12b2ad58.chunk.css",
+    "static/js/main.1a7d7570.chunk.js"
   ]
 }
