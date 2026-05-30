@@ -1,80 +1,77 @@
-import MUIDataTable from "mui-datatables";
-import { parseString, separateComponents } from "../utils/utils";
+import Accordion from "@material-ui/core/Accordion";
+import AccordionSummary from "@material-ui/core/AccordionSummary";
+import AccordionDetails from "@material-ui/core/AccordionDetails";
+import Typography from "@material-ui/core/Typography";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import { pairIngredientsWithStrength, toTitleCase } from "../utils/utils";
 
 function DisplayResults({ results, searchTerm }) {
-  const parsedRows = results.map((result, index) => {
-    const row = { ...result, id: index };
-    Object.keys(row).forEach((key) => {
-      if (typeof row[key] === "string" && key !== "forensic_classification") {
-        row[key] = parseString(row[key]);
-        if (key === "active_ingredients" || key === "strength") {
-          row[key] = separateComponents(row[key]);
-        }
-      }
-    });
-    return row;
-  });
-
-  const columns = [
-    {
-      name: "product_name",
-      label: "Product Name",
-    },
-    {
-      name: "active_ingredients",
-      label: "Active Ingredients",
-    },
-    {
-      name: "strength",
-      label: "Strength",
-    },
-    {
-      name: "dosage_form",
-      label: "Dosage Form",
-    },
-    {
-      name: "forensic_classification",
-      label: "Forensic Classification",
-      options: {
-        display: false,
-      },
-    },
-    {
-      name: "manufacturer",
-      label: "Manufacturer",
-      options: {
-        display: false,
-      },
-    },
-    {
-      name: "country_of_manufacturer",
-      label: "Country of Manufacturer",
-      options: {
-        display: false,
-      },
-    },
+  const detailFields = [
+    { key: "dosage_form", label: "Dosage Form" },
+    { key: "manufacturer", label: "Manufacturer" },
+    { key: "country_of_manufacturer", label: "Country of Manufacturer" },
   ];
 
   return (
-    <MUIDataTable
-      title={`Search Results for "${searchTerm}"`}
-      data={parsedRows}
-      columns={columns}
-      options={{
-        resizableColumns: true,
-        filter: false,
-        rowsPerPage: 20,
-        rowsPerPageOptions: [20, 50],
-        responsive: "standard",
-        selectableRows: "none",
-        textLabels: {
-          body: {
-            noMatch:
-              "No records found. Please check if you have spelt the name correctly.",
-          },
-        },
-      }}
-    />
+    <section id="results">
+      <Typography variant="h6" id="results-title">
+        Search Results for "{searchTerm}"
+      </Typography>
+
+      {results.length === 0 ? (
+        <Typography id="no-results">
+          No records found. Please check if you have spelt the name correctly.
+        </Typography>
+      ) : (
+        results.map((result, index) => {
+          const ingredients = pairIngredientsWithStrength(
+            result.active_ingredients,
+            result.strength
+          );
+
+          return (
+            <Accordion key={index} className="result-card">
+              <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                <div className="result-summary">
+                  <Typography className="result-name">
+                    {toTitleCase(result.product_name)}
+                  </Typography>
+
+                  <div className="result-ingredients">
+                    {ingredients.map(({ ingredient, strength }, i) => (
+                      <Typography key={i} className="result-ingredient">
+                        {strength
+                          ? `${toTitleCase(ingredient)} — ${strength.toLowerCase()}`
+                          : toTitleCase(ingredient)}
+                      </Typography>
+                    ))}
+                  </div>
+
+                  {result.forensic_classification && (
+                    <Typography className="result-classification">
+                      {toTitleCase(result.forensic_classification)}
+                    </Typography>
+                  )}
+                </div>
+              </AccordionSummary>
+
+              <AccordionDetails>
+                <div className="result-details">
+                  {detailFields.map(({ key, label }) => (
+                    <div key={key} className="result-detail-row">
+                      <span className="result-detail-label">{label}</span>
+                      <span className="result-detail-value">
+                        {result[key] ? toTitleCase(result[key]) : "—"}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </AccordionDetails>
+            </Accordion>
+          );
+        })
+      )}
+    </section>
   );
 }
 
